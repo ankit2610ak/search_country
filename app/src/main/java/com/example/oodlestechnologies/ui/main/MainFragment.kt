@@ -10,9 +10,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.oodlestechnologies.R
 import com.example.oodlestechnologies.adapter.CountryAdapter
+import com.example.oodlestechnologies.databinding.MainFragmentBinding
 import com.example.oodlestechnologies.model.CountryItem
 
 @Suppress("DEPRECATION")
@@ -23,7 +22,7 @@ class MainFragment : Fragment() {
     }
 
     private lateinit var viewModel: MainViewModel
-    private lateinit var recyclerView: RecyclerView
+    private lateinit var binding: MainFragmentBinding
     private lateinit var adapter: CountryAdapter
     private var countryList: ArrayList<CountryItem> = ArrayList()
 
@@ -32,9 +31,9 @@ class MainFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val view = inflater.inflate(R.layout.main_fragment, container, false)
-        recyclerView = view.findViewById(R.id.recycler_view)
-        recyclerView.layoutManager =
+        binding = MainFragmentBinding.inflate(layoutInflater)
+        val view = binding.root
+        binding.recyclerView.layoutManager =
             GridLayoutManager(this.requireContext(), 3)
 
         viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
@@ -46,7 +45,7 @@ class MainFragment : Fragment() {
         adapter = CountryAdapter(countryList, this.requireContext())
 
         viewModel.getAllCountries()
-        recyclerView.adapter = adapter
+        binding.recyclerView.adapter = adapter
 
         return view
 
