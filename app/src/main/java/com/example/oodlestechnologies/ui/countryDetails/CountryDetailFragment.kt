@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.oodlestechnologies.databinding.CountryDetailFragmentBinding
+import com.example.oodlestechnologies.model.CountryHashMap
 
 class CountryDetailFragment : Fragment() {
 
@@ -34,7 +35,7 @@ class CountryDetailFragment : Fragment() {
             binding.capital.text = it.capital
             binding.region.text = it.region
             binding.population.text = it.population.toString()
-//            binding.flag.text = Html.fromHtml("&#x1F1EE;&#x1F1F3")
+            binding.flag.text = Html.fromHtml(CountryHashMap.items[alpha2code]?.unicode)
         })
 
         viewModel.getCountryDetails(alpha2code)
