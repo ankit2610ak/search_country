@@ -1,13 +1,13 @@
 package com.example.oodlestechnologies.ui.countryDetails
 
 import android.os.Bundle
+import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import com.bumptech.glide.Glide
 import com.example.oodlestechnologies.databinding.CountryDetailFragmentBinding
 
 class CountryDetailFragment : Fragment() {
@@ -34,7 +34,7 @@ class CountryDetailFragment : Fragment() {
             binding.capital.text = it.capital
             binding.region.text = it.region
             binding.population.text = it.population.toString()
-            Glide.with(this).load("it.flag").into(binding.flag)
+//            binding.flag.text = Html.fromHtml("&#x1F1EE;&#x1F1F3")
         })
 
         viewModel.getCountryDetails(alpha2code)
