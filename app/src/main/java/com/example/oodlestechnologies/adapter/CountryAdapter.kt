@@ -3,17 +3,21 @@ package com.example.oodlestechnologies.adapter
 import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
+import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.example.oodlestechnologies.MainActivity
 import com.example.oodlestechnologies.R
+import com.example.oodlestechnologies.model.CountryHashMap
 import com.example.oodlestechnologies.model.CountryItem
+import com.example.oodlestechnologies.model.JSONDataClass
 import com.example.oodlestechnologies.ui.countryDetails.CountryDetailFragment
+import com.example.oodlestechnologies.utils.Utils
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 
 
 class CountryAdapter(
@@ -38,7 +42,7 @@ class CountryAdapter(
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
         val countryItem = countryArrayList[position]
-        Glide.with(context).load(countryItem.flag).into(holder.pic)
+        holder.pic.text = Html.fromHtml(CountryHashMap.items[countryItem.alpha2Code]?.unicode)
         holder.name.text = countryItem.name
         holder.itemView.setOnClickListener {
             val fragment = CountryDetailFragment.newInstance()
@@ -56,7 +60,7 @@ class CountryAdapter(
 
     class CustomViewHolder(itemLayoutView: View) : RecyclerView.ViewHolder(itemLayoutView) {
         var name: TextView = itemLayoutView.findViewById(R.id.heading)
-        var pic: ImageView = itemLayoutView.findViewById(R.id.icon)
+        var pic: TextView = itemLayoutView.findViewById(R.id.icon)
 
     }
 
