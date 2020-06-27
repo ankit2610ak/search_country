@@ -13,11 +13,7 @@ import com.example.oodlestechnologies.MainActivity
 import com.example.oodlestechnologies.R
 import com.example.oodlestechnologies.model.CountryHashMap
 import com.example.oodlestechnologies.model.CountryItem
-import com.example.oodlestechnologies.model.JSONDataClass
 import com.example.oodlestechnologies.ui.countryDetails.CountryDetailFragment
-import com.example.oodlestechnologies.utils.Utils
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 
 
 class CountryAdapter(
@@ -42,7 +38,9 @@ class CountryAdapter(
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
         val countryItem = countryArrayList[position]
-        holder.pic.text = Html.fromHtml(CountryHashMap.items[countryItem.alpha2Code]?.unicode)
+        if (CountryHashMap.items[countryItem.alpha2Code] != null) {
+            holder.pic.text = Html.fromHtml(CountryHashMap.items[countryItem.alpha2Code]?.unicode)
+        }
         holder.name.text = countryItem.name
         holder.itemView.setOnClickListener {
             val fragment = CountryDetailFragment.newInstance()

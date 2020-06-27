@@ -13,10 +13,6 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.example.oodlestechnologies.adapter.CountryAdapter
 import com.example.oodlestechnologies.databinding.MainFragmentBinding
 import com.example.oodlestechnologies.model.CountryItem
-import com.example.oodlestechnologies.model.JSONDataClass
-import com.example.oodlestechnologies.utils.Utils
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 
 @Suppress("DEPRECATION")
 class MainFragment : Fragment() {

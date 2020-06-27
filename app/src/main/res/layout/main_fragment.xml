@@ -7,7 +7,7 @@
     android:focusableInTouchMode="true">
 
     <EditText
-        android:id="@+id/searchExamEdittext"
+        android:id="@+id/searchEdittext"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dim_36"
         android:layout_marginLeft="@dimen/dim_12"
@@ -30,9 +30,9 @@
         android:layout_marginRight="@dimen/dim_8"
         android:padding="@dimen/dim_8"
         android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="@id/searchExamEdittext"
-        app:layout_constraintEnd_toEndOf="@id/searchExamEdittext"
-        app:layout_constraintTop_toTopOf="@id/searchExamEdittext" />
+        app:layout_constraintBottom_toBottomOf="@id/searchEdittext"
+        app:layout_constraintEnd_toEndOf="@id/searchEdittext"
+        app:layout_constraintTop_toTopOf="@id/searchEdittext" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"
@@ -43,7 +43,7 @@
         android:layout_marginRight="@dimen/dim_16"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchExamEdittext" />
+        app:layout_constraintTop_toBottomOf="@+id/searchEdittext" />
 
 
     <ProgressBar
