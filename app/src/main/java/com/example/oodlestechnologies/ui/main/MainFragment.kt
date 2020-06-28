@@ -2,7 +2,11 @@
 
 package com.example.oodlestechnologies.ui.main
 
+import android.annotation.SuppressLint
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +17,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.example.oodlestechnologies.adapter.CountryAdapter
 import com.example.oodlestechnologies.databinding.MainFragmentBinding
 import com.example.oodlestechnologies.model.CountryItem
+import kotlin.math.log
 
 @Suppress("DEPRECATION")
 class MainFragment : Fragment() {
@@ -24,8 +29,6 @@ class MainFragment : Fragment() {
     private lateinit var viewModel: MainViewModel
     private lateinit var binding: MainFragmentBinding
     private lateinit var adapter: CountryAdapter
-    private var countryList: ArrayList<CountryItem> = ArrayList()
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,18 +40,42 @@ class MainFragment : Fragment() {
             GridLayoutManager(this.requireContext(), 3)
 
         viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
-        viewModel._livedata.observe(viewLifecycleOwner, Observer {
-            countryList.clear()
-            countryList.addAll(it)
-            adapter.notifyDataSetChanged()
-        })
-        adapter = CountryAdapter(countryList, this.requireContext())
 
+        viewModel._livedata.observe(viewLifecycleOwner, Observer {
+            adapter.updateList(it)
+        })
+
+        adapter = CountryAdapter(ArrayList(), this.requireContext())
         viewModel.getAllCountries()
         binding.recyclerView.adapter = adapter
+
+        binding.searchEdittext.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(
+                s: CharSequence,
+                start: Int,
+                count: Int,
+                after: Int
+            ) {
+                Log.d("MainFragment", s.toString())
+            }
+
+            override fun onTextChanged(
+                s: CharSequence,
+                start: Int,
+                before: Int,
+                count: Int
+            ) {
+                viewModel.filterText(s.toString())
+            }
+
+            override fun afterTextChanged(s: Editable) {
+
+            }
+        })
 
         return view
 
     }
+
 
 }

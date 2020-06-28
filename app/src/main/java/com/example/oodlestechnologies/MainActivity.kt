@@ -13,10 +13,6 @@ import com.google.gson.reflect.TypeToken
 
 class MainActivity : AppCompatActivity(), FragmentListener {
 
-    companion object {
-        fun newInstance() = MainActivity()
-    }
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

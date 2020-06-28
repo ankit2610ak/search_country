@@ -10,6 +10,8 @@ import retrofit2.Call
 import retrofit2.Response
 
 class MainViewModel : ViewModel() {
+    private var originalList: ArrayList<CountryItem> = ArrayList()
+    val filteredList: ArrayList<CountryItem> = ArrayList()
     private var liveData: MutableLiveData<ArrayList<CountryItem>> = MutableLiveData()
     val _livedata: LiveData<ArrayList<CountryItem>>
         get() = liveData
@@ -26,10 +28,32 @@ class MainViewModel : ViewModel() {
                 response: Response<ArrayList<CountryItem>>
             ) {
                 val countryList = response.body()
-                liveData.postValue(countryList)
+                originalList.clear()
+                originalList.addAll(countryList!!)
+                if(filteredList.size > 0){
+                    liveData.postValue(filteredList)
+                }
+                else{
+                    liveData.postValue(countryList)
+                }
             }
 
         })
     }
+
+    fun filterText(text: String) {
+        findFilteredList(text)
+    }
+
+    private fun findFilteredList(text: String) {
+        filteredList.clear()
+        for (item in originalList) {
+            if (item.alpha2Code.toLowerCase().contains(text.toLowerCase())) {
+                filteredList.add(item)
+            }
+        }
+        liveData.postValue(filteredList)
+    }
+
 
 }

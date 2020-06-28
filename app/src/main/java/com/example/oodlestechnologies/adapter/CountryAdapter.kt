@@ -17,7 +17,7 @@ import com.example.oodlestechnologies.ui.countryDetails.CountryDetailFragment
 
 
 class CountryAdapter(
-    private val countryArrayList: ArrayList<CountryItem>
+    private var countryArrayList: ArrayList<CountryItem>
     , private val context: Context
 
 ) : RecyclerView.Adapter<CountryAdapter.CustomViewHolder>() {
@@ -31,10 +31,9 @@ class CountryAdapter(
 
     }
 
-    override fun getItemCount(): Int {
-        return countryArrayList.size
-    }
+    override fun getItemCount(): Int = countryArrayList.size
 
+    @Suppress("DEPRECATION")
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
         val countryItem = countryArrayList[position]
@@ -53,6 +52,12 @@ class CountryAdapter(
 
     private fun replaceFragment(fragment: CountryDetailFragment) {
         (context as MainActivity).replaceFragment(fragment)
+    }
+
+    fun updateList(filteredList: java.util.ArrayList<CountryItem>) {
+        countryArrayList.clear()
+        countryArrayList.addAll(filteredList)
+        notifyDataSetChanged()
     }
 
 
