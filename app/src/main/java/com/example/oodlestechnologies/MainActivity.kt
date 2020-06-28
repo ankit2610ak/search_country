@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity(), FragmentListener {
         setContentView(R.layout.main_activity)
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
-                .replace(R.id.container, MainFragment.newInstance())
+                .add(R.id.container, MainFragment.newInstance())
                 .commitNow()
         }
 
@@ -39,7 +39,8 @@ class MainActivity : AppCompatActivity(), FragmentListener {
 
     override fun replaceFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction()
-            .replace(R.id.container, fragment)
+            .add(R.id.container,fragment)
+            .addToBackStack("2nd fragment")
             .commit()
     }
 }
