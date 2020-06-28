@@ -2,7 +2,6 @@
 
 package com.example.oodlestechnologies.ui.main
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -16,8 +15,6 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.oodlestechnologies.adapter.CountryAdapter
 import com.example.oodlestechnologies.databinding.MainFragmentBinding
-import com.example.oodlestechnologies.model.CountryItem
-import kotlin.math.log
 
 @Suppress("DEPRECATION")
 class MainFragment : Fragment() {
@@ -43,6 +40,7 @@ class MainFragment : Fragment() {
 
         viewModel._livedata.observe(viewLifecycleOwner, Observer {
             adapter.updateList(it)
+            binding.progressBar.visibility = View.GONE
         })
 
         adapter = CountryAdapter(ArrayList(), this.requireContext())
